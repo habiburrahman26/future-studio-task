@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-  ],
+    "**/*.mts",
+    "generate-products.js"  ],
   "exclude": ["node_modules"]
 }
