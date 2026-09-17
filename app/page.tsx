@@ -1,7 +1,8 @@
 // src/app/products/page.tsx
 
-import { getProducts, getFilterOptions } from "@/features/product/services";
-import { ProductFilters } from "@/features/product/types";
+import ProductCard from '@/features/product/components/product-cart';
+import { getProducts, getFilterOptions } from '@/features/product/services';
+import { ProductFilters } from '@/features/product/types';
 // import your components...
 
 interface Props {
@@ -12,21 +13,24 @@ export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
 
   const filters: ProductFilters = {
-    search: params.search || "",
-    category: params.category ,
+    search: params.search || '',
+    category: params.category,
     brand: params.brand,
     minPrice: params.minPrice ? Number(params.minPrice) : undefined,
     maxPrice: params.maxPrice ? Number(params.maxPrice) : undefined,
     rating: params.rating ? Number(params.rating) : undefined,
-    sort: (params.sort as ProductFilters["sort"]),
+    sort: params.sort as ProductFilters['sort'],
     page: params.page ? Number(params.page) : 1,
     limit: 12,
   };
 
   const [{ products, total, page, totalPages }, { categories, brands }] =
-    await Promise.all([getProducts(filters), Promise.resolve(getFilterOptions())]);
+    await Promise.all([
+      getProducts(filters),
+      Promise.resolve(getFilterOptions()),
+    ]);
 
-  console.log(products)
+  console.log(products);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -34,6 +38,11 @@ export default async function ProductsPage({ searchParams }: Props) {
 
       {/* Your Filters component here */}
       {/* Your ProductGrid here */}
+     <div className='grid grid-cols-3 gap-3'>
+       {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+     </div>
       {/* Your Pagination here */}
 
       {products.length === 0 && (
