@@ -36,9 +36,7 @@ export async function getProducts(
   if (filters.page) params.set("page", String(filters.page));
   if (filters.limit) params.set("limit", String(filters.limit));
 
-  const res = await fetch(`${BASE_URL}/api/products?${params.toString()}`, {
-    next: { revalidate: 60 }, // cache for 60 seconds
-  });
+  const res = await fetch(`${BASE_URL}/api/products?${params.toString()}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch products");
