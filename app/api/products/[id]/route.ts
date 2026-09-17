@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import productsData from '@/data/products.json';
-import { Product } from '@/lib/api/types';
+import { Product } from '@/features/product/types';
 
 const allProducts = productsData as Product[];
 

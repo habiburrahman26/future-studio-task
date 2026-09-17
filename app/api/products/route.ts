@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import productsData from '@/data/products.json';
-import { Product } from '@/lib/api/types';
+import { Product } from '@/features/product/types';
 
 const allProducts = productsData as Product[];
 
@@ -10,6 +10,7 @@ export async function GET(req: NextRequest) {
 
     const search = searchParams.get('search')?.trim();
     const category = searchParams.get('category');
+    const brand = searchParams.get('brand');
     const minPrice = searchParams.get('minPrice');
     const maxPrice = searchParams.get('maxPrice');
     const rating = searchParams.get('rating');
@@ -25,7 +26,6 @@ export async function GET(req: NextRequest) {
         (p) =>
           p.name.toLowerCase().includes(q) ||
           p.description.toLowerCase().includes(q) ||
-          p.brand.toLowerCase().includes(q) ||
           p.tags.some((tag) => tag.toLowerCase().includes(q)),
       );
     }
@@ -33,6 +33,12 @@ export async function GET(req: NextRequest) {
     if (category) {
       filtered = filtered.filter(
         (p) => p.category.toLowerCase() === category.toLowerCase(),
+      );
+    }
+
+    if (brand) {
+      filtered = filtered.filter(
+        (p) => p.brand.toLowerCase() === brand.toLowerCase(),
       );
     }
 
@@ -82,6 +88,9 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error('Error fetching products:', error);
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch products' },
+      { status: 500 },
+    );
   }
 }

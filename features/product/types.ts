@@ -16,6 +16,7 @@ export interface Product {
 export interface ProductFilters {
   search?: string;
   category?: string;
+  brand?:string;
   minPrice?: number;
   maxPrice?: number;
   rating?: number;
