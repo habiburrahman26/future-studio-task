@@ -18,7 +18,7 @@ function ImageGallery({
 
   return (
     <div className="w-full">
-      <div className="relative aspect-[1.3/1] overflow-hidden rounded-lg border border-[#c6b2b8] bg-shadow-[0_0_0_2px_rgba(40,33,28,0.05)]">
+      <div className="relative aspect-[1.2/1] overflow-hidden rounded-lg border border-[#c6b2b8] bg-shadow-[0_0_0_2px_rgba(40,33,28,0.05)]">
         <Image
           src={images[selectedImage]}
           alt={`${productName} image`}
@@ -32,9 +32,9 @@ function ImageGallery({
         {images.map((image, index) => (
           <div
             key={`${image}-${index}`}
-            className={`relative cursor-pointer aspect-square overflow-hidden rounded-lg border ${
+            className={`relative cursor-pointer aspect-square overflow-hidden rounded-lg ${
               index === selectedImage
-                ? 'ring-1'
+                ? 'ring-2'
                 : 'ring-0'
             }`}
             onClick={()=>handleSelectedImage(index)}

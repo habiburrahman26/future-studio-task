@@ -4,9 +4,16 @@ import { formatPrice } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function ProductCard({ product }: { product: Product }) {
+type ProductCardProps = {
+  product: Product;
+  titleLength?: number;
+};
+
+function ProductCard({ product, titleLength = 37 }: ProductCardProps) {
   const name =
-    product.name.length > 26 ? `${product.name.slice(0, 26)}...` : product.name;
+    product.name.length > titleLength
+      ? `${product.name.slice(0, titleLength)}..`
+      : product.name;
 
   return (
     <Link
@@ -30,10 +37,13 @@ function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="px-2.5 pb-3 pt-3.5">
-        <p className="text-sm uppercase tracking-[0.18em] text-subtle">
+        <p className="text-sm uppercase tracking-wider text-subtle">
           {product.brand}
         </p>
-        <h3 className="mt-1 font-display text-lg leading-snug text-nowrap" title={product.name}>
+        <h3
+          className="mt-1 font-display text-lg leading-snug text-nowrap"
+          title={product.name}
+        >
           {name}
         </h3>
         <div className="mt-3 flex items-center justify-between text-base">
@@ -53,7 +63,9 @@ function ProductCard({ product }: { product: Product }) {
             >
               <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
             </svg>
-            <span className="tabular-nums">{product.rating.toFixed(1)}</span>
+            <span className="tabular-nums text-sm">
+              {product.rating.toFixed(1)}
+            </span>
           </span>
         </div>
       </div>

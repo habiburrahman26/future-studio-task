@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import {
   getProductById,
-  getRelatedProducts,
 } from '@/features/product/services';
 import { formatPrice } from '@/lib/utils';
 import ImageGallery from '@/features/product/components/image-gallery';
@@ -14,10 +13,7 @@ export default async function SingleProduct({
 }) {
   const { id } = await params;
 
-  const [product, relatedProducts] = await Promise.all([
-    getProductById(id),
-    getRelatedProducts(id, 3),
-  ]);
+  const product = await getProductById(id)
 
   if (!product) {
     notFound();
@@ -91,7 +87,7 @@ export default async function SingleProduct({
         </div>
       </div>
 
-      <RelatedProduct />
+      <RelatedProduct id={id}/>
     </div>
   );
 }
