@@ -67,11 +67,13 @@ export async function getRelatedProducts(
   limit = 4
 ): Promise<Product[]> {
   const res = await fetch(
-    `${BASE_URL}/api/products/${productId}/related?limit=${limit}`,
+    `${BASE_URL}/api/products/related/${productId}?limit=${limit}`,
     {
       next: { revalidate: 60 },
     }
   );
+
+  console.log("res", res)
 
   if (!res.ok) {
     throw new Error("Failed to fetch related products");

@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <div className='className="min-h-dvh"'>
+        <div className="min-h-dvh">
           <Header />
           <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
           <Footer />
