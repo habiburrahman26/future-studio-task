@@ -24,10 +24,7 @@ export async function getProducts(
     params.set("brand", filters.brand)
   }
   if (filters.price !== undefined) {
-    params.set("minPrice", String(filters.minPrice));
-  }
-  if (filters.maxPrice !== undefined && Number.isFinite(filters.maxPrice)) {
-    params.set("maxPrice", String(filters.maxPrice));
+    params.set("price", String(filters.price));
   }
   if (filters.rating !== undefined && Number.isFinite(filters.rating)) {
     params.set("rating", String(filters.rating));

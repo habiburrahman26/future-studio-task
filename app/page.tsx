@@ -14,12 +14,12 @@ interface Props {
 export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
 
+
   const filters: ProductFilters = {
     search: params.search || '',
     category: params.category,
     brand: params.brand,
-    minPrice: params.minPrice ? Number(params.minPrice) : undefined,
-    maxPrice: params.maxPrice ? Number(params.maxPrice) : undefined,
+    price: params.price,
     rating: params.rating ? Number(params.rating) : undefined,
     sort: params.sort as ProductFilters['sort'],
     page: params.page ? Number(params.page) : 1,

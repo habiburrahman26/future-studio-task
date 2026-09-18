@@ -5,7 +5,7 @@ import StarIcon from '@/components/ui/star-icon';
 import { getFilterOptions } from '../services';
 import { cn } from '@/lib/utils';
 import ArrowIcon from '@/components/ui/arrow-icon';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function ProductFilter() {
   const { categories, brands } = getFilterOptions();
@@ -15,10 +15,9 @@ function ProductFilter() {
   const selectedCategory = searchParams.get('category') || '';
   const selectedBrand = searchParams.get('brand') || '';
   const selectedRating = Number(searchParams.get('rating')) || 0;
-  const price = searchParams.get("price")
-  const [min, max] = price ? price.split("-") : []
+  const price = searchParams.get('price');
+  const [min = '', max = ''] = price ? price.split('-') : [];
 
-  console.log("price", price)
   const [minPrice, setMinPrice] = useState(min);
   const [maxPrice, setMaxPrice] = useState(max);
 
@@ -51,7 +50,11 @@ function ProductFilter() {
   const setPrice = () => {
     const params = new URLSearchParams(searchParams.toString());
 
-    params.set('price', `${String(minPrice)} - ${String(maxPrice)}`);
+    if (minPrice || maxPrice) {
+      params.set('price', `${minPrice}-${maxPrice}`);
+    } else {
+      params.delete('price');
+    }
 
     params.set('page', '1');
     router.push(`${pathname}?${params.toString()}`, { scroll: true });
@@ -147,14 +150,14 @@ function ProductFilter() {
             type="number"
             placeholder="Min"
             value={minPrice}
-            onChange={(e)=>setMinPrice(e.target.value)}
+            onChange={(e) => setMinPrice(e.target.value)}
             className="h-10 min-w-0 w-full rounded-md border border-border p-2 text-sm outline-none placeholder:text-sm focus:ring-2 focus:ring-paper"
           />
           <input
             type="number"
             placeholder="Max"
             value={maxPrice}
-            onChange={(e)=>setMaxPrice(e.target.value)}
+            onChange={(e) => setMaxPrice(e.target.value)}
             className="h-10 min-w-0 w-full rounded-md border border-border p-2 text-sm outline-none placeholder:text-sm focus:ring-2 focus:ring-paper"
           />
           <button

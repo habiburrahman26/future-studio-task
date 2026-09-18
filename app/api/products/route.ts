@@ -11,12 +11,13 @@ export async function GET(req: NextRequest) {
     const search = searchParams.get('search')?.trim();
     const category = searchParams.get('category');
     const brand = searchParams.get('brand');
-    const minPrice = searchParams.get('minPrice');
-    const maxPrice = searchParams.get('maxPrice');
+    const price = searchParams.get('price');
     const rating = searchParams.get('rating');
     const sort = searchParams.get('sort') || 'newest';
     const page = Math.max(1, Number(searchParams.get('page')) || 1);
     const limit = Math.max(1, Number(searchParams.get('limit')) || 12);
+
+    const [minPrice, maxPrice] = price ? price.split('-') : [];
 
     let filtered = [...allProducts];
 

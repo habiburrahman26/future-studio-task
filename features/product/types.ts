@@ -25,7 +25,7 @@ export type ProductFilters = {
   search?: string;
   category?: string;
   brand?: string;
-  price?: number;
+  price?: string;
   rating?: number;
   sort?: 'price-asc' | 'price-desc' | 'rating' | 'newest';
   page?: number;
