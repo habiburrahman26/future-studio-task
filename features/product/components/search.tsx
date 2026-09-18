@@ -37,7 +37,7 @@ function Search() {
     <form
       onSubmit={submitSearch}
       role="search"
-      className="mb-6 flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-border/80 bg-surface p-1.5 shadow-border transition-shadow focus-within:shadow-border-hover"
+      className="mb-3 md:mb-6 flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-border/80 bg-surface p-1.5 shadow-border transition-shadow focus-within:shadow-border-hover"
     >
       <div className="flex min-w-0 flex-1 items-center gap-3 px-3">
         <svg

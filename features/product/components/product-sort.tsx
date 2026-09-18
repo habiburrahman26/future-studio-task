@@ -24,7 +24,7 @@ function ProductSort() {
     <select
       defaultValue={searchParams.get('sort') || ''}
       onChange={handleSortChange}
-      className="h-auto py-4 px-3 bg-surface border-2 border-border rounded-2xl mb-6 text-subtle text-sm"
+      className="w-full md:w-auto h-auto py-4 px-3 bg-surface border-2 border-border rounded-2xl text-sm"
     >
       <option value="">Featured</option>
       <option value="price-asc">Price: Low to high</option>

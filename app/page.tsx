@@ -1,5 +1,6 @@
 // src/app/products/page.tsx
 
+import FilterModal from '@/features/product/components/filter-modal';
 import Pagination from '@/features/product/components/pagination';
 import ProductCard from '@/features/product/components/product-cart';
 import ProductFilter from '@/features/product/components/product-filter';
@@ -14,7 +15,6 @@ interface Props {
 
 export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
-
 
   const filters: ProductFilters = {
     search: params.search || '',
@@ -31,15 +31,20 @@ export default async function ProductsPage({ searchParams }: Props) {
     await getProducts(filters);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-2 lg:px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">All Products</h1>
 
-      <div className="grid grid-cols-4 gap-6">
-        <ProductFilter />
-        <div className="col-span-3">
-          <div className='flex items-center gap-4'>
+      <div className="grid lg:grid-cols-4 gap-6">
+        <div className="hidden lg:block">
+          <ProductFilter />
+        </div>
+        <div className="lg:col-span-3">
+          <div className="flex flex-col md:flex-row items-center sm:gap-4">
             <Search />
-            <ProductSort />
+            <div className='flex items-center gap-4 w-full md:w-auto mb-6'>
+              <ProductSort />
+             <FilterModal/>
+            </div>
           </div>
           {products.length === 0 ? (
             <div className="text-center py-20">
@@ -50,7 +55,7 @@ export default async function ProductsPage({ searchParams }: Props) {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {products?.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
