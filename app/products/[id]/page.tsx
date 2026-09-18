@@ -5,6 +5,7 @@ import ImageGallery from '@/features/product/components/image-gallery';
 import RelatedProduct from '@/features/product/components/related-product';
 import Review from '@/features/product/components/review';
 import { Badge } from '@/components/ui/badge';
+import StarIcon from '@/components/ui/star-icon';
 
 export default async function SingleProduct({
   params,
@@ -28,7 +29,7 @@ export default async function SingleProduct({
             {product.category.toUpperCase()}
           </p>
 
-          <h1 className="mt-3 text-5xl font-display font-medium leading-none tracking-[-0.06em] text-[#1e1a17] md:text-4xl">
+          <h1 className="mt-3 text-3xl font-display font-medium leading-none tracking-[-0.06em] text-[#1e1a17] md:text-4xl">
             {product.name}
           </h1>
 
@@ -37,15 +38,7 @@ export default async function SingleProduct({
               {formatPrice(product.price)}
             </span>
             <span className="inline-flex items-center gap-2 text-[#504c48]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="h-4 w-4 text-black"
-                aria-hidden="true"
-              >
-                <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
-              </svg>
+             <StarIcon/>
               <span className="font-medium">{product.rating}</span>
               <span className="text-[#685f59]">({product.reviewCount})</span>
             </span>

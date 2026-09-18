@@ -12,7 +12,7 @@ async function RelatedProduct({ id }: RelatedProductProps) {
     <div className="mt-12">
       <h2 className="text-2xl pb-4">Related Products</h2>
 
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {relatedProducts.map((p) => (
           <ProductCard key={p.id} product={p} titleLength={25} />
         ))}

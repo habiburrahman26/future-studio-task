@@ -79,7 +79,7 @@ export async function GET(req: NextRequest) {
     const totalPages = Math.ceil(total / limit) || 1;
     const currentPage = Math.min(page, totalPages);
     const start = (currentPage - 1) * limit;
-    const products = filtered.slice(0,520);
+    const products = filtered.slice(start, start + limit);
 
     return NextResponse.json({
       products,

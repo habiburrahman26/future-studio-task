@@ -34,8 +34,8 @@ function ImageGallery({
             key={`${image}-${index}`}
             className={`relative cursor-pointer aspect-square overflow-hidden rounded-lg ${
               index === selectedImage
-                ? 'ring-2'
-                : 'ring-0'
+                ? 'ring-2 ring-ok'
+                : 'ring-1 ring-border'
             }`}
             onClick={()=>handleSelectedImage(index)}
           >

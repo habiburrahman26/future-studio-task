@@ -1,5 +1,6 @@
 // src/app/products/page.tsx
 
+import Pagination from '@/features/product/components/pagination';
 import ProductCard from '@/features/product/components/product-cart';
 import { getProducts, getFilterOptions } from '@/features/product/services';
 import { ProductFilters } from '@/features/product/types';
@@ -21,10 +22,10 @@ export default async function ProductsPage({ searchParams }: Props) {
     rating: params.rating ? Number(params.rating) : undefined,
     sort: params.sort as ProductFilters['sort'],
     page: params.page ? Number(params.page) : 1,
-    limit: 12,
+    limit: 20,
   };
 
-  const [{ products, total, page, totalPages }, { categories, brands }] =
+  const [{ products, total, page, limit, totalPages }, { categories, brands }] =
     await Promise.all([
       getProducts(filters),
       Promise.resolve(getFilterOptions()),
@@ -44,6 +45,12 @@ export default async function ProductsPage({ searchParams }: Props) {
       ))}
      </div>
       {/* Your Pagination here */}
+      <Pagination
+        total={total}
+        page={page}
+        limit={limit}
+        totalPages={totalPages}
+      />
 
       {products.length === 0 && (
         <div className="text-center py-20">
