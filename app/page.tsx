@@ -3,6 +3,7 @@
 import Pagination from '@/features/product/components/pagination';
 import ProductCard from '@/features/product/components/product-cart';
 import ProductFilter from '@/features/product/components/product-filter';
+import ProductSort from '@/features/product/components/product-sort';
 import Search from '@/features/product/components/search';
 import { getProducts } from '@/features/product/services';
 import { ProductFilters } from '@/features/product/types';
@@ -36,7 +37,10 @@ export default async function ProductsPage({ searchParams }: Props) {
       <div className="grid grid-cols-4 gap-6">
         <ProductFilter />
         <div className="col-span-3">
-          <Search />
+          <div className='flex items-center gap-4'>
+            <Search />
+            <ProductSort />
+          </div>
           {products.length === 0 ? (
             <div className="text-center py-20">
               <h3 className="text-xl font-medium">No products found</h3>
