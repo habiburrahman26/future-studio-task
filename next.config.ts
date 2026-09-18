@@ -10,8 +10,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "fastly.picsum.photos",
-        pathname: "/id/**",
+        hostname: "placeholdr.dev",
       },
     ],
   },

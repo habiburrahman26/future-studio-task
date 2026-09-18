@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation';
-import {
-  getProductById,
-} from '@/features/product/services';
+import { getProductById } from '@/features/product/services';
 import { formatPrice } from '@/lib/utils';
 import ImageGallery from '@/features/product/components/image-gallery';
 import RelatedProduct from '@/features/product/components/related-product';
+import Review from '@/features/product/components/review';
+import { Badge } from '@/components/ui/badge';
 
 export default async function SingleProduct({
   params,
@@ -13,7 +13,7 @@ export default async function SingleProduct({
 }) {
   const { id } = await params;
 
-  const product = await getProductById(id)
+  const product = await getProductById(id);
 
   if (!product) {
     notFound();
@@ -22,7 +22,7 @@ export default async function SingleProduct({
   return (
     <div className="mx-auto max-w-6xl py-4">
       <div className="grid items-start gap-10 lg:grid-cols-[1.08fr_1fr] lg:gap-12">
-          <ImageGallery images={product.images} productName={product.name}/>
+        <ImageGallery images={product.images} productName={product.name} />
         <div className="pt-4 lg:pt-8">
           <p className="text-[0.72rem] font-medium uppercase tracking-[0.35em] text-[#726b65]">
             {product.category.toUpperCase()}
@@ -49,10 +49,14 @@ export default async function SingleProduct({
               <span className="font-medium">{product.rating}</span>
               <span className="text-[#685f59]">({product.reviewCount})</span>
             </span>
-            <span className="text-[#685f59]">In stock • {product.stock}</span>
+            {product.stock > 0 ? (
+              <Badge>In stock • {product.stock}</Badge>
+            ) : (
+              <Badge >Sold Out</Badge>
+            )}
           </div>
 
-          <p className="mt-7 max-w-xl text-[1.12rem] leading-relaxed text-[#4d4945]">
+          <p className="mt-5 max-w-xl leading-relaxed text-[#4d4945]">
             {product.description}
           </p>
 
@@ -87,7 +91,8 @@ export default async function SingleProduct({
         </div>
       </div>
 
-      <RelatedProduct id={id}/>
+      <Review reviews={product.reviews} />
+      <RelatedProduct id={id} />
     </div>
   );
 }

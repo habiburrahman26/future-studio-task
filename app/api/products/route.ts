@@ -18,6 +18,8 @@ export async function GET(req: NextRequest) {
     const page = Math.max(1, Number(searchParams.get('page')) || 1);
     const limit = Math.max(1, Number(searchParams.get('limit')) || 12);
 
+    console.log("limit", limit)
+
     let filtered = [...allProducts];
 
     if (search) {
@@ -77,7 +79,7 @@ export async function GET(req: NextRequest) {
     const totalPages = Math.ceil(total / limit) || 1;
     const currentPage = Math.min(page, totalPages);
     const start = (currentPage - 1) * limit;
-    const products = filtered.slice(start, start + limit);
+    const products = filtered.slice(0,520);
 
     return NextResponse.json({
       products,

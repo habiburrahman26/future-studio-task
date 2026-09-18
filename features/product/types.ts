@@ -1,4 +1,11 @@
-export interface Product {
+export type Review = {
+  rating: number;
+  comment: string;
+  author: string;
+  date: string;
+};
+
+export type Product = {
   id: string;
   name: string;
   description: string;
@@ -10,25 +17,26 @@ export interface Product {
   stock: number;
   images: string[];
   tags: string[];
+  reviews: Review[];
   createdAt: string;
-}
+};
 
-export interface ProductFilters {
+export type ProductFilters = {
   search?: string;
   category?: string;
-  brand?:string;
+  brand?: string;
   minPrice?: number;
   maxPrice?: number;
   rating?: number;
-  sort?: "price-asc" | "price-desc" | "rating" | "newest";
+  sort?: 'price-asc' | 'price-desc' | 'rating' | 'newest';
   page?: number;
   limit?: number;
-}
+};
 
-export interface ProductsResponse {
+export type ProductsResponse = {
   products: Product[];
   total: number;
   page: number;
   limit: number;
   totalPages: number;
-}
+};

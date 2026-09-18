@@ -40,7 +40,29 @@ const PRODUCT_TYPES = {
   Jewelry: ["Necklace", "Bracelet", "Earrings", "Ring", "Watch", "Anklet", "Cufflinks", "Brooch", "Pendant", "Chain"],
 };
 
-const IMAGE_BASE = "https://picsum.photos/seed"; // free placeholder images
+const REVIEW_COMMENTS = [
+  "Great product, highly recommend!",
+  "Exactly as described. Very satisfied.",
+  "Good quality for the price.",
+  "Works well, shipping was fast.",
+  "Nice design and solid build.",
+  "Met my expectations.",
+  "Would buy again.",
+  "Decent, but could be better.",
+  "Love it! Perfect for daily use.",
+  "Average product, nothing special.",
+  "Exceeded my expectations.",
+  "Comfortable and practical.",
+  "Value for money.",
+  "Looks premium and feels durable.",
+  "Simple and effective.",
+];
+
+const REVIEW_AUTHORS = [
+  "Alex M.", "Jordan K.", "Sam T.", "Casey L.", "Riley P.",
+  "Taylor R.", "Morgan S.", "Jamie N.", "Avery W.", "Quinn H.",
+  "Blake C.", "Drew F.", "Cameron B.", "Harper J.", "Reese D.",
+];
 
 function randomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -54,6 +76,21 @@ function randomFloat(min, max, decimals = 2) {
   return Number((Math.random() * (max - min) + min).toFixed(decimals));
 }
 
+function generateReviews(count) {
+  const reviews = [];
+  for (let i = 0; i < count; i++) {
+    reviews.push({
+      rating: randomFloat(3.0, 5.0, 1),
+      comment: randomItem(REVIEW_COMMENTS),
+      author: randomItem(REVIEW_AUTHORS),
+      date: new Date(
+        Date.now() - randomInt(0, 180 * 24 * 60 * 60 * 1000)
+      ).toISOString(),
+    });
+  }
+  return reviews;
+}
+
 function generateProduct(id) {
   const category = randomItem(CATEGORIES);
   const type = randomItem(PRODUCT_TYPES[category]);
@@ -64,13 +101,18 @@ function generateProduct(id) {
   const price = randomFloat(9.99, 1299.99);
   const rating = randomFloat(3.0, 5.0, 1);
   const stock = randomInt(0, 250);
-  const reviewCount = randomInt(5, 850);
+  const reviewCount = randomInt(5, 20); // keep reviews array reasonable
+  const reviews = generateReviews(reviewCount);
 
-  // Generate 3 images with unique seeds
+  // Product-oriented AI placeholders (deterministic per id via seed)
+  // Format: https://placeholdr.dev/{w}x{h}/{prompt}?style=photographic&seed={n}
+  const prompt = encodeURIComponent(
+    `product photo of ${type.toLowerCase()} on white background, studio lighting, ecommerce style`
+  );
   const images = [
-    `${IMAGE_BASE}/${id}-1/600/600`,
-    `${IMAGE_BASE}/${id}-2/600/600`,
-    `${IMAGE_BASE}/${id}-3/600/600`,
+    `https://placeholdr.dev/600x600/${prompt}?style=photographic&seed=1`,
+    `https://placeholdr.dev/600x600/${prompt}?style=photographic&seed=2`,
+    `https://placeholdr.dev/600x600/${prompt}?style=photographic&seed=3`,
   ];
 
   const description = `Experience the ${adjective.toLowerCase()} quality of the ${name}. Designed for everyday use with excellent performance and style. Perfect for anyone looking for a reliable ${type.toLowerCase()} in the ${category} category.`;
@@ -83,11 +125,14 @@ function generateProduct(id) {
     category,
     brand,
     rating,
-    reviewCount,
+    reviewCount: reviews.length,
+    reviews,
     stock,
     images,
     tags: [category.toLowerCase(), type.toLowerCase(), brand.toLowerCase()],
-    createdAt: new Date(Date.now() - randomInt(0, 365 * 24 * 60 * 60 * 1000)).toISOString(),
+    createdAt: new Date(
+      Date.now() - randomInt(0, 365 * 24 * 60 * 60 * 1000)
+    ).toISOString(),
   };
 }
 
