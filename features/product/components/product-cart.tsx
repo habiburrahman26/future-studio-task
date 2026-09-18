@@ -7,14 +7,13 @@ import Link from 'next/link';
 
 type ProductCardProps = {
   product: Product;
-  titleLength?: number;
 };
 
-function ProductCard({ product, titleLength = 37 }: ProductCardProps) {
+function ProductCard({ product}: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.id}`}
-      className="group block rounded-[26px] bg-surface p-2.5 shadow-(--shadow-border) transition-[box-shadow,transform] duration-300 ease-out  hover:shadow-(--shadow-border-hover)"
+      className="group block rounded-[26px] bg-surface p-2.5 shadow-(--shadow-border) transition-[box-shadow,transform] duration-300 ease-out hover:shadow-(--shadow-border-hover)"
     >
       <div className="relative aspect-square overflow-hidden rounded-[19px] bg-paper">
         <Image

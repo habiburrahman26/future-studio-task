@@ -2,6 +2,7 @@
 
 import { useTransition } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import ArrowIcon from '@/components/ui/arrow-icon';
 
 type PaginationProps = {
   total: number;
@@ -9,29 +10,6 @@ type PaginationProps = {
   limit: number;
   totalPages: number;
 };
-
-type ArrowIconProps = {
-  direction: 'left' | 'right';
-};
-
-function ArrowIcon({ direction }: ArrowIconProps) {
-  return (
-    <svg
-      aria-hidden="true"
-      className="size-4"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="1.8"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d={direction === 'left' ? 'm15 18-6-6 6-6' : 'm9 18 6-6-6-6'}
-      />
-    </svg>
-  );
-}
 
 function Pagination({ total, page, limit, totalPages }: PaginationProps) {
   const router = useRouter();
@@ -67,7 +45,7 @@ function Pagination({ total, page, limit, totalPages }: PaginationProps) {
       const params = new URLSearchParams(searchParams.toString());
       params.set('page', String(targetPage));
       startTransition(() => {
-        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+        router.push(`${pathname}?${params.toString()}`, { scroll: true });
       });
     }
   };

@@ -18,8 +18,6 @@ export async function GET(req: NextRequest) {
     const page = Math.max(1, Number(searchParams.get('page')) || 1);
     const limit = Math.max(1, Number(searchParams.get('limit')) || 12);
 
-    console.log("limit", limit)
-
     let filtered = [...allProducts];
 
     if (search) {
@@ -44,14 +42,14 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    if (minPrice) {
+    if (minPrice && isFinite(+minPrice)) {
       filtered = filtered.filter((p) => p.price >= Number(minPrice));
     }
-    if (maxPrice) {
+    if (maxPrice && isFinite(+maxPrice)) {
       filtered = filtered.filter((p) => p.price <= Number(maxPrice));
     }
 
-    if (rating) {
+    if (rating && isFinite(+rating)) {
       filtered = filtered.filter((p) => p.rating >= Number(rating));
     }
 
@@ -65,7 +63,6 @@ export async function GET(req: NextRequest) {
       case 'rating':
         filtered.sort((a, b) => b.rating - a.rating);
         break;
-      case 'newest':
       default:
         filtered.sort(
           (a, b) =>

@@ -23,7 +23,7 @@ export async function getProducts(
   if(filters.brand){
     params.set("brand", filters.brand)
   }
-  if (filters.minPrice !== undefined && Number.isFinite(filters.minPrice)) {
+  if (filters.price !== undefined) {
     params.set("minPrice", String(filters.minPrice));
   }
   if (filters.maxPrice !== undefined && Number.isFinite(filters.maxPrice)) {
@@ -36,7 +36,9 @@ export async function getProducts(
   if (filters.page) params.set("page", String(filters.page));
   if (filters.limit) params.set("limit", String(filters.limit));
 
-  const res = await fetch(`${BASE_URL}/api/products?${params.toString()}`);
+  const res = await fetch(`${BASE_URL}/api/products?${params.toString()}`)
+
+  console.log(res)
 
   if (!res.ok) {
     throw new Error("Failed to fetch products");
