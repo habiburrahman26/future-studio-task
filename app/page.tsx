@@ -31,7 +31,7 @@ export default async function ProductsPage({ searchParams }: Props) {
     await getProducts(filters);
 
   return (
-    <div className="container mx-auto px-2 lg:px-4 py-8">
+    <div className="mx-auto px-2 lg:px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">All Products</h1>
 
       <div className="grid lg:grid-cols-4 gap-6">

@@ -25,12 +25,10 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <div className="min-h-dvh">
-          <Header />
-          <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
-          <Footer />
-        </div>
+      <body className="min-h-dvh">
+        <Header />
+        <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
+        <Footer />
       </body>
     </html>
   );
