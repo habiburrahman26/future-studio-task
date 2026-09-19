@@ -43,10 +43,12 @@ export default async function SingleProduct({
               <span className="font-medium">{product.rating}</span>
               <span>({product.reviewCount})</span>
             </span>
-            {product.stock > 0 ? (
-              <Badge>In stock • {product.stock}</Badge>
+             {product.stock === 0 ? (
+              <Badge>Sold out</Badge>
+            ) : product.stock < 8 ? (
+              <Badge>Low stock · {product.stock}</Badge>
             ) : (
-              <Badge>Sold Out</Badge>
+              <Badge>In stock · {product.stock}</Badge>
             )}
           </div>
 
