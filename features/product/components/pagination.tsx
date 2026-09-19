@@ -2,7 +2,7 @@
 
 import { useTransition } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import ArrowIcon from '@/components/ui/arrow-icon';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 type PaginationProps = {
   total: number;
@@ -70,7 +70,7 @@ function Pagination({ total, page, limit, totalPages }: PaginationProps) {
           onClick={() => goToPage(currentPage - 1)}
           className="flex size-10 items-center justify-center rounded-full text-muted transition-colors hover:bg-paper hover:text-fg disabled:pointer-events-none disabled:opacity-35"
         >
-          <ArrowIcon direction="left" />
+         <ChevronLeft />
         </button>
 
         <div className="flex items-center gap-1" aria-live="polite">
@@ -110,7 +110,7 @@ function Pagination({ total, page, limit, totalPages }: PaginationProps) {
           onClick={() => goToPage(currentPage + 1)}
           className="flex size-10 items-center justify-center rounded-full text-muted transition-colors hover:bg-paper hover:text-fg disabled:pointer-events-none disabled:opacity-35"
         >
-          <ArrowIcon direction="right" />
+          <ChevronRight />
         </button>
       </div>
     </div>

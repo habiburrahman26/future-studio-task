@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
-import StarIcon from '@/components/ui/star-icon';
 import type { Product } from '@/features/product/types';
 import { formatPrice } from '@/lib/utils';
+import { Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -43,7 +43,7 @@ function ProductCard({ product}: ProductCardProps) {
         <div className="mt-3 flex items-center justify-between text-base">
           <span className="tabular-nums">{formatPrice(product.price)}</span>
           <span className="inline-flex items-center gap-1 text-muted">
-            <StarIcon />
+            <Star className="size-3.5 fill-fg text-fg" />
             <span className="tabular-nums text-sm">
               {product.rating.toFixed(1)}
             </span>

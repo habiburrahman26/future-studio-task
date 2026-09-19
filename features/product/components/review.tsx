@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import StarIcon from '@/components/ui/star-icon';
 import { Review as ReviewType } from '../types';
+import { Star } from 'lucide-react';
 
 type ReviewProps = {
   reviews: ReviewType[];
@@ -39,7 +39,7 @@ function Review({ reviews }: ReviewProps) {
                 </div>
               </div>
               <span className="flex h-6 shrink-0 items-center justify-center gap-1 rounded-full bg-paper px-2.5 text-xs font-semibold leading-none text-primary">
-                <StarIcon className="size-3.5 shrink-0" />
+                <Star className="size-3.5 fill-fg text-fg" />
                 {review.rating.toFixed(1)}
               </span>
             </div>

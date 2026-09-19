@@ -3,21 +3,21 @@
 import { useCart } from '@/store/cart';
 import { useState } from 'react';
 import { Product } from '../types';
+import { toast, Toaster } from 'sonner';
+import { cn } from '@/lib/utils';
 
-type AddToCartType={
-    product: Product
-}
+type AddToCartType = {
+  product: Product;
+};
 
-
-
-function AddToCart({product}:AddToCartType) {
-  const { add, items } = useCart();
+function AddToCart({ product }: AddToCartType) {
+  const add = useCart((s) => s.add);
   const [quantity, setQuantity] = useState(1);
-
-  console.log(items)
+  const soldOut = product.stock <= 0;
 
   return (
     <div className="mt-8 flex items-center gap-4">
+      <Toaster />
       <div className="flex items-center overflow-hidden rounded-xl border border-border bg-paper text-fg shadow-border">
         <button
           type="button"
@@ -43,10 +43,19 @@ function AddToCart({product}:AddToCartType) {
 
       <button
         type="button"
-        className="inline-flex h-12 flex-1 items-center justify-center rounded-xl bg-primary px-6 text-base font-medium text-paper shadow-border transition-color hover:bg-ok"
-        onClick={()=>add(product, quantity)}
+        className={cn(
+          'inline-flex h-12 flex-1 items-center justify-center rounded-xl bg-primary px-6 text-base font-medium text-paper shadow-border transition-color hover:bg-ok',
+          {
+            'cursor-not-allowed': soldOut,
+          },
+        )}
+        disabled={soldOut}
+        onClick={() => {
+          add(product, quantity);
+          toast.success('Added to bag');
+        }}
       >
-        Add to bag
+        {soldOut ? 'Sold out' : 'Add to bag'}
       </button>
     </div>
   );

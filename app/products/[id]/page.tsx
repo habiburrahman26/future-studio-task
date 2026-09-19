@@ -5,8 +5,8 @@ import ImageGallery from '@/features/product/components/image-gallery';
 import RelatedProduct from '@/features/product/components/related-product';
 import Review from '@/features/product/components/review';
 import { Badge } from '@/components/ui/badge';
-import StarIcon from '@/components/ui/star-icon';
 import AddToCart from '@/features/product/components/add-to-cart';
+import { Star } from 'lucide-react';
 
 export default async function SingleProduct({
   params,
@@ -38,8 +38,8 @@ export default async function SingleProduct({
             <span className="text-[1.05rem] font-medium tabular-nums">
               {formatPrice(product.price)}
             </span>
-            <span className="inline-flex items-center gap-2">
-              <StarIcon />
+            <span className="inline-flex items-center gap-2 text-sm text-subtle">
+              <Star className="size-3.5 fill-fg text-fg" />
               <span className="font-medium">{product.rating}</span>
               <span>({product.reviewCount})</span>
             </span>

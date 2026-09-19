@@ -1,11 +1,10 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import StarIcon from '@/components/ui/star-icon';
 import { getFilterOptions } from '../services';
 import { cn } from '@/lib/utils';
-import ArrowIcon from '@/components/ui/arrow-icon';
 import { useState } from 'react';
+import { ChevronRight, Star } from 'lucide-react';
 
 function ProductFilter() {
   const { categories, brands } = getFilterOptions();
@@ -166,7 +165,7 @@ function ProductFilter() {
             className="flex h-10 w-10 items-center justify-center rounded-md border border-border p-2 transition-colors hover:bg-paper focus:outline-none focus:ring-2 focus:ring-paper"
             onClick={setPrice}
           >
-            <ArrowIcon direction="right" />
+           <ChevronRight />
           </button>
         </div>
       </div>
@@ -194,7 +193,7 @@ function ProductFilter() {
             >
               <span className="flex items-center gap-0.5" aria-hidden="true">
                 {Array.from({ length: 5 }, (_, index) => (
-                  <StarIcon
+                  <Star
                     key={index}
                     className={cn('size-4 fill-transparent stroke-subtle', {
                       'fill-primary stroke-primary': index < rating,
