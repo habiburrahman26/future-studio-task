@@ -10,9 +10,9 @@ import Button from '@/components/ui/button';
 export default function CartPage() {
   const { items, setQty, remove, clear } = useCart();
   const hasHydrated = useSyncExternalStore(
-    useCart.persist.onFinishHydration,
-    useCart.persist.hasHydrated,
-    () => false,
+    (onStoreChange) => useCart.persist.onFinishHydration(onStoreChange),
+    () => useCart.persist.hasHydrated(),
+    () => false
   );
   const subtotal = cartSubtotal(items);
 

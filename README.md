@@ -56,7 +56,7 @@ The UI is split into reusable components. Product logic lives in the product fea
 
 ### API and Data Fetching
 
- ** Please ignore the product images because they are AI generated on request time so some times its take too much time to generate the image or some times its fail to generate image
+ **Please ignore the product images because they are AI generated on request time so some times its take too much time to generate the image or some times its fail to generate image**
 
 - Product data starts in `data/products.json`.
 - API route handlers in `app/api/products` provide product listing, filtering, product details, and related products.
