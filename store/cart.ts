@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import type { Product } from "@/features/product/types";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { Product } from '@/features/product/types';
 
 export interface CartItem {
   product: Product;
@@ -19,7 +19,7 @@ export const useCart = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
-     
+
       add: (product, quantity = 1) => {
         const items = get().items.slice();
         const idx = items.findIndex((it) => it.product.id === product.id);
@@ -32,7 +32,8 @@ export const useCart = create<CartState>()(
         }
         set({ items });
       },
-      remove: (id) => set({ items: get().items.filter((it) => it.product.id !== id) }),
+      remove: (id) =>
+        set({ items: get().items.filter((it) => it.product.id !== id) }),
       setQty: (id, quantity) => {
         if (quantity < 1) {
           set({ items: get().items.filter((it) => it.product.id !== id) });
@@ -48,7 +49,7 @@ export const useCart = create<CartState>()(
       },
       clear: () => set({ items: [] }),
     }),
-    { name: "future-cart" },
+    { name: 'future-cart' },
   ),
 );
 

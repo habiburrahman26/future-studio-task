@@ -60,8 +60,8 @@ export default function Checkout() {
       <form
         className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px]"
         onSubmit={form.handleSubmit(() => {
-            clear();
           router.push('/checkout/success');
+          clear();
         })}
       >
         <div className="space-y-4">

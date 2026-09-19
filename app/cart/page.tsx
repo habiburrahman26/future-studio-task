@@ -2,19 +2,31 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSyncExternalStore } from 'react';
 import { cartSubtotal, useCart } from '@/store/cart';
 import { formatPrice } from '@/lib/utils';
 import Button from '@/components/ui/button';
 
 export default function CartPage() {
   const { items, setQty, remove, clear } = useCart();
+  const hasHydrated = useSyncExternalStore(
+    useCart.persist.onFinishHydration,
+    useCart.persist.hasHydrated,
+    () => false,
+  );
   const subtotal = cartSubtotal(items);
 
   return (
     <section className="py-2 sm:py-8">
       <h1 className="font-display text-3xl leading-none">Bag</h1>
 
-      {items.length === 0 ? (
+      {!hasHydrated ? (
+        <div className="mt-10 rounded-[28px] bg-surface px-6 py-16 text-center shadow-(--shadow-border)">
+          <p className="text-muted" role="status">
+            Loading your bag...
+          </p>
+        </div>
+      ) : items.length === 0 ? (
         <div className="mt-10 rounded-[28px] bg-surface px-6 py-16 text-center shadow-(--shadow-border)">
           <h2 className="text-3xl">Your bag is empty</h2>
           <p className="mt-3 text-muted">Find something worth taking home.</p>
