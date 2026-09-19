@@ -2,6 +2,7 @@
 
 import { SubmitEvent, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { SearchIcon } from 'lucide-react';
 
 function Search() {
   const router = useRouter();
@@ -40,17 +41,7 @@ function Search() {
       className="mb-3 md:mb-6 flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-border/80 bg-surface p-1.5 shadow-border transition-shadow focus-within:shadow-border-hover"
     >
       <div className="flex min-w-0 flex-1 items-center gap-3 px-3">
-        <svg
-          aria-hidden="true"
-          className="size-5 shrink-0 text-muted"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="1.8"
-        >
-          <circle cx="11" cy="11" r="6.5" />
-          <path strokeLinecap="round" d="m16 16 4.5 4.5" />
-        </svg>
+        <SearchIcon  className="size-5 shrink-0 text-muted"/>
         <input
           type="text"
           value={query}
