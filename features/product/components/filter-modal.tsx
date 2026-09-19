@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useEffect, useRef } from 'react';
 import ProductFilter from './product-filter';
+import { SlidersHorizontal, X } from 'lucide-react';
 
 function FilterModal() {
   const [showModal, setShowModal] = useState(false);
@@ -36,30 +37,9 @@ function FilterModal() {
         aria-expanded={showModal}
         aria-controls="product-filter-dialog"
         onClick={() => setShowModal((prevState) => !prevState)}
-        className="flex items-center justify-center gap-1 lg:hidden p-4 text-sm font-medium bg-bg border-2 border-border rounded-md"
+        className="flex items-center justify-center gap-1 lg:hidden px-4 h-14 text-sm font-medium bg-bg border-2 border-border rounded-md"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="size-4"
-        >
-          <path d="M10 5H3" />
-          <path d="M12 19H3" />
-          <path d="M14 3v4" />
-          <path d="M16 17v4" />
-          <path d="M21 12h-9" />
-          <path d="M21 19h-5" />
-          <path d="M21 5h-7" />
-          <path d="M8 10v4" />
-          <path d="M8 12H3" />
-        </svg>
+        <SlidersHorizontal />
         Filters
       </button>
 
@@ -87,21 +67,7 @@ function FilterModal() {
                 onClick={() => setShowModal(false)}
                 className="flex size-10 items-center justify-center rounded-md border border-border transition-colors hover:bg-paper focus:outline-none focus:ring-2 focus:ring-paper"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
+                <X />
               </button>
             </div>
             <ProductFilter />

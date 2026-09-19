@@ -44,9 +44,7 @@ export async function getProducts(
  * Get single product by ID
  */
 export async function getProductById(id: string): Promise<Product | null> {
-  const res = await fetch(`${BASE_URL}/api/products/${id}`, {
-    next: { revalidate: 60 },
-  });
+  const res = await fetch(`${BASE_URL}/api/products/${id}`);
 
   if (res.status === 404) return null;
   if (!res.ok) throw new Error('Failed to fetch product');
@@ -62,10 +60,7 @@ export async function getRelatedProducts(
   limit = 4,
 ): Promise<Product[]> {
   const res = await fetch(
-    `${BASE_URL}/api/products/related/${productId}?limit=${limit}`,
-    {
-      next: { revalidate: 60 },
-    },
+    `${BASE_URL}/api/products/related/${productId}?limit=${limit}`
   );
 
   if (!res.ok) {
