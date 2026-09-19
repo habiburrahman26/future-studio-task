@@ -1,7 +1,7 @@
 import { Product, ProductFilters, ProductsResponse } from './types';
 import productsData from '@/data/products.json';
 
-const BASE_URL = process.env.NEXT_PUBLIC;
+const BASE_URL = process.env.BASE_URL;
 
 
 /**
