@@ -6,6 +6,7 @@ import RelatedProduct from '@/features/product/components/related-product';
 import Review from '@/features/product/components/review';
 import { Badge } from '@/components/ui/badge';
 import StarIcon from '@/components/ui/star-icon';
+import AddToCart from '@/features/product/components/add-to-cart';
 
 export default async function SingleProduct({
   params,
@@ -53,34 +54,7 @@ export default async function SingleProduct({
             {product.description}
           </p>
 
-          <div className="mt-8 flex items-center gap-4">
-            <div className="flex items-center overflow-hidden rounded-xl border border-border bg-paper text-fg shadow-border">
-              <button
-                type="button"
-                className="flex h-12 w-12 items-center justify-center text-2xl text-[#2d2723] transition hover:bg-bg"
-                aria-label="Decrease quantity"
-              >
-                −
-              </button>
-              <span className="flex h-12 w-14 items-center justify-center text-lg font-medium tabular-nums">
-                1
-              </span>
-              <button
-                type="button"
-                className="flex h-12 w-12 items-center justify-center text-2xl text-[#2d2723] transition hover:bg-bg"
-                aria-label="Increase quantity"
-              >
-                +
-              </button>
-            </div>
-
-            <button
-              type="button"
-              className="inline-flex h-12 flex-1 items-center justify-center rounded-xl bg-primary px-6 text-base font-medium text-paper shadow-border transition-color hover:bg-ok"
-            >
-              Add to bag
-            </button>
-          </div>
+          <AddToCart product={product}/>
         </div>
       </div>
 

@@ -15,7 +15,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: 'Future E-commerce',
+  title: 'Future Shop',
   description: 'This is an e-commerce website',
 };
 
