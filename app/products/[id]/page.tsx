@@ -7,6 +7,21 @@ import Review from '@/features/product/components/review';
 import { Badge } from '@/components/ui/badge';
 import AddToCart from '@/features/product/components/add-to-cart';
 import { Star } from 'lucide-react';
+import { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  const product = await getProductById(id);
+  return {
+    title: product?.name || "Future Shop",
+    description: product?.description,
+  };
+}
 
 export default async function SingleProduct({
   params,
@@ -43,7 +58,7 @@ export default async function SingleProduct({
               <span className="font-medium">{product.rating}</span>
               <span>({product.reviewCount})</span>
             </span>
-             {product.stock === 0 ? (
+            {product.stock === 0 ? (
               <Badge>Sold out</Badge>
             ) : product.stock < 8 ? (
               <Badge>Low stock · {product.stock}</Badge>
@@ -56,7 +71,7 @@ export default async function SingleProduct({
             {product.description}
           </p>
 
-          <AddToCart product={product}/>
+          <AddToCart product={product} />
         </div>
       </div>
 
